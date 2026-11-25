@@ -28,7 +28,8 @@ jobs:
 
       - name: Preparar Android
         uses: android-actions/setup-android@v3
-
+      - name: Aceitar licenças Android
+        run: yes | sdkmanager --licenses
       - name: Criar projeto Android
         run: |
           mkdir -p www
