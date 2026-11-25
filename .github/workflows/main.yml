@@ -28,8 +28,11 @@ jobs:
 
       - name: Preparar Android
         uses: android-actions/setup-android@v3
-      - name: Aceitar licenças Android
-        run: yes | sdkmanager --licenses
+           - name: Aceitar licenças Android
+        run: |
+          mkdir -p "$ANDROID_HOME/licenses"
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses || true
+          yes | "$ANDROID_HOME/cmdline-tools/16.0/bin/sdkmanager" --licenses || true
       - name: Criar projeto Android
         run: |
           mkdir -p www
