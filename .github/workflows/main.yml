@@ -42,13 +42,20 @@ jobs:
       - name: Criar projeto Android
         run: |
           mkdir -p www
+          mkdir -p assets
           cp index.html style.css *.js *.png *.jpg *.jpeg *.webp *.m4a www/ 2>/dev/null || true
+          cp "ícone-mandarim-academia.png" assets/icon.png
+
           npm init -y
           npm install @capacitor/core@6 @capacitor/cli@6 @capacitor/android@6
           npm install @capacitor-community/text-to-speech@4.0.2 esbuild
+          npm install --save-dev @capacitor/assets
+
           npx esbuild tts.js --bundle --platform=browser --format=iife --outfile=www/tts.bundle.js
+
           npx cap init "Academia de Mandarim" mz.academia.mandarim --web-dir www
           npx cap add android
+          npx capacitor-assets generate --android
           npx cap sync android
 
       - name: Construir APK
