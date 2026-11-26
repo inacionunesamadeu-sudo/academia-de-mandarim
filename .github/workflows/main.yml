@@ -46,8 +46,8 @@ jobs:
           mkdir -p www
           cp index.html style.css *.js *.png *.jpg *.jpeg *.webp *.m4a www/ 2>/dev/null || true
           npm init -y
-          npm install @capacitor/core@6 @capacitor/cli@6 @capacitor/android@6
-npm install @capacitor-community/text-to-speech@4.0.2 esbuild
+                    npm install @capacitor/core@6 @capacitor/cli@6 @capacitor/android@6
+          npm install @capacitor-community/text-to-speech@4.0.2 esbuild
           npx cap init "Academia de Mandarim" mz.academia.mandarim --web-dir www
           npx cap add android
           npx cap sync android
