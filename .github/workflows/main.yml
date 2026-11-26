@@ -43,8 +43,19 @@ jobs:
         run: |
           mkdir -p www
           mkdir -p assets
+
           cp index.html style.css *.js *.png *.jpg *.jpeg *.webp *.m4a www/ 2>/dev/null || true
-          cp "ícone-mandarim-academia.png" assets/icon.png
+
+          ICON_FILE=$(find . -type f \( -name "ícone-mandarim-academia.png" -o -name "academia-mandarim-icon.png" \) -not -path "./.git/*" | head -n 1)
+
+          if [ -z "$ICON_FILE" ]; then
+            echo "ERRO: Imagem do ícone não encontrada."
+            find . -type f -iname "*.png"
+            exit 1
+          fi
+
+          echo "Ícone encontrado: $ICON_FILE"
+          cp "$ICON_FILE" assets/icon.png
 
           npm init -y
           npm install @capacitor/core@6 @capacitor/cli@6 @capacitor/android@6
@@ -55,7 +66,9 @@ jobs:
 
           npx cap init "Academia de Mandarim" mz.academia.mandarim --web-dir www
           npx cap add android
+
           npx capacitor-assets generate --android
+
           npx cap sync android
 
       - name: Construir APK
