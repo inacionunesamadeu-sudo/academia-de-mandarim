@@ -27,17 +27,19 @@ jobs:
           node-version: '20'
 
       
+     
       - name: Preparar Android
         uses: android-actions/setup-android@v3
         with:
           accept-android-sdk-licenses: false
-          packages: |
-            platform-tools
-            platforms;android-34
-            build-tools;34.0.0
+          packages: platform-tools
 
       - name: Aceitar licenças Android
         run: yes | sdkmanager --licenses
+
+      - name: Instalar componentes Android
+        run: |
+          sdkmanager "platforms;android-34" "build-tools;34.0.0"
 
       - name: Criar projeto Android
         run: |
