@@ -14834,6 +14834,8 @@ function iniciarAprendizagem() {
     window.scrollTo(0, 0);
 }
 </script>
-<script src="tts.bundle.js"></script>
+<script src="tts.bundle.js"
+onload="alert('Teste de voz: ' + typeof window.falarComVozNativa)"
+onerror="alert('Erro: ficheiro de voz não carregou')"></script>
 </body>
 </html>
