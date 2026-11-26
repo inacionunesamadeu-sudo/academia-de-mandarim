@@ -354,31 +354,13 @@ function mostrarVogais() {
 
 
 
-function falar(texto) {
 
-    if (typeof window.speechSynthesis === "undefined" ||
-        typeof window.SpeechSynthesisUtterance === "undefined") {
-        alert("O sistema de voz não está disponível nesta aplicação. Precisamos ativar a voz Android.");
-        return;
-    }
-
-    window.speechSynthesis.cancel();
-
-    const voz = new SpeechSynthesisUtterance(texto);
-
-    const temMandarim = /[\u3400-\u9FFF]/.test(texto);
-
-    if (temMandarim) {
-        voz.lang = "zh-CN";
-        voz.rate = 0.75;
+async function falar(texto) {
+    if (window.falarComVozNativa) {
+        await window.falarComVozNativa(texto);
     } else {
-        voz.lang = "pt-PT";
-        voz.rate = 0.9;
+        alert("O sistema de voz ainda não foi carregado.");
     }
-
-    voz.pitch = 1;
-
-    window.speechSynthesis.speak(voz);
 }
 
 const iniciais = [
