@@ -26,13 +26,14 @@ jobs:
         with:
           node-version: '20'
 
-            - name: Preparar Android
+      - name: Preparar Android
         uses: android-actions/setup-android@v3
         with:
           accept-android-sdk-licenses: false
 
       - name: Aceitar licenças Android
         run: yes | sdkmanager --licenses
+
       - name: Criar projeto Android
         run: |
           mkdir -p www
