@@ -353,14 +353,16 @@ function mostrarVogais() {
 }
 
 
+
 function falar(texto) {
 
-    if (!("speechSynthesis" in window)) {
-        alert("O teu navegador não suporta áudio. Abre a Academia no Google Chrome.");
+    if (typeof window.speechSynthesis === "undefined" ||
+        typeof window.SpeechSynthesisUtterance === "undefined") {
+        alert("O sistema de voz não está disponível nesta aplicação. Precisamos ativar a voz Android.");
         return;
     }
 
-    speechSynthesis.cancel();
+    window.speechSynthesis.cancel();
 
     const voz = new SpeechSynthesisUtterance(texto);
 
@@ -376,9 +378,8 @@ function falar(texto) {
 
     voz.pitch = 1;
 
-    speechSynthesis.speak(voz);
+    window.speechSynthesis.speak(voz);
 }
-
 
 const iniciais = [
     "b", "p", "m", "f",
